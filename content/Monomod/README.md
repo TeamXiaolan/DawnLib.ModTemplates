@@ -1,1 +1,12 @@
-make sure to fill out the needed information in thunderstore.toml
+# TODO before release:
+- `thunderstore.toml`:
+    - **Important**: Set `namespace` (this is your author name) and `description`
+    - Set `websiteUrl`
+    - Update `DawnLib` version
+    - Note that the name of your mod is determined by the name of the project, and the version is determined in your `.csproj`
+- `.csproj`:
+    - Update `DawnLib` version
+- `DawnLib__ModTemplateKeys.cs`:
+    - Look in this file
+- Update this README! (it gets used to generate your mods readme)
+- Finally, build in the `Release` configuration to create the zip

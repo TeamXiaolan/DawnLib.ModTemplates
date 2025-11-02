@@ -2,10 +2,10 @@
     "$schema": "http://json.schemastore.org/template",
     "author": "loaforc",
     "classifications": [ "Lethal Company", "Mod", "BepInEx", "Monomod" ],
-    "identity": "TeamXiaolan.LC.CRLibTemplate",
-    "name": "CodeRebirthLib Monomod Mod Template",
-    "shortName": [ "crlibmod" ],
-    "sourceName": "CRLib.ModTemplate",
+    "identity": "TeamXiaolan.LC.DawnLibTemplate",
+    "name": "DawnLib Mod Template",
+    "shortName": [ "dawnlibmod" ],
+    "sourceName": "DawnLib.ModTemplate",
     "tags": {
         "language": "C#",
         "type": "project"
@@ -27,20 +27,48 @@
             "type": "derived",
             "valueSource": "name",
             "valueTransform": "namespace",
-            "replaces": "CRLib._ModTemplate"
+            "replaces": "DawnLib._ModTemplate"
         },
         "ClassnameReplacer": {
             "type": "derived",
             "valueSource": "name",
             "valueTransform": "classname",
-            "replaces": "CRLib__ModTemplate",
-            "fileRename": "CRLib__ModTemplate"
+            "replaces": "DawnLib__ModTemplate",
+            "fileRename": "DawnLib__ModTemplate"
         },
         "IdentityReplacer": {
             "type": "derived",
             "valueSource": "name",
             "valueTransform": "identity",
             "replaces": "{Product}"
+        },
+        "DawnNamespace": {
+            "type": "generated",
+            "generator": "regex",
+            "datatype": "text",
+            "parameters": {
+                "source": "name",
+                "steps": [
+                    {
+                        "regex": "(?<=[a-z0-9])(?=[A-Z])",
+                        "replacement": "_"
+                    },
+                    {
+                        "regex": "\\d+",
+                        "replacement": ""
+                    }
+                ]
+            }
+        },
+        "DawnNamespaceLower": {
+            "type": "generated",
+            "generator": "casing",
+            "datatype": "text",
+            "parameters": {
+                "source": "DawnNamespace",
+                "toLower": true
+            },
+            "replaces": "{DawnNamespace}"
         },
         "Version": {
             "type": "parameter",
@@ -49,11 +77,17 @@
             "defaultValue": "1.0.0",
             "replaces": "{Version}"
         },
+        "UseDusk": {
+            "type": "parameter",
+            "description": "Should your mod use Dusk, the editor component of DawnLib? This requires some additonal setup to access stuff from C#.",
+            "datatype": "bool",
+            "defaultValue": "false"
+        },
         "ModGuid": {
             "type": "parameter",
             "description": "The global identifier specific to your mod. (Ex. username.ModName)",
             "datatype": "text"
-        },
+        },        
         "ModGuidGen": {
             "type": "generated",
             "generator": "coalesce",
@@ -155,7 +189,7 @@
             "manualInstructions": [ { "text": "Add generated project to solution manually." } ],
             "args": {
                 "solutionFolder": "src",
-                "projectFiles": [ "CRLib.ModTemplate.csproj" ]
+                "projectFiles": [ "DawnLib.ModTemplate.csproj" ]
             },
             "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
             "continueOnError": true
