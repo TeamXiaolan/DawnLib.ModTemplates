@@ -70,4 +70,4 @@ jobs:
 
       - name: Publish to NuGet.org
         run: |
-          dotnet nuget push ./bin/Release/*.nupkg --api-key ${{ secrets.NUGET_API_TOKEN }} --source https://api.nuget.org/v3/index.json
+          dotnet nuget push ./bin/Release/*.nupkg --api-key ${{ secrets.DAWNLIB_NUGET }} --source https://api.nuget.org/v3/index.json
